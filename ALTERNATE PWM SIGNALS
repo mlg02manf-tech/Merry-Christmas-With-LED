@@ -1,0 +1,183 @@
+int Led1 = 3;
+int Led2 = 5;
+int Led3 = 6;
+int Led4 = 9;
+int Led5 = 10;
+int Led6 = 11;
+int Buzzer = 8;
+
+void setup()
+{
+  pinMode(Led1, OUTPUT);
+  pinMode(Led2, OUTPUT);
+  pinMode(Led3, OUTPUT);
+  pinMode(Led4, OUTPUT);
+  pinMode(Led5, OUTPUT);
+  pinMode(Led6, OUTPUT);
+  pinMode(Buzzer, OUTPUT);
+}
+
+void FadingPapart() {
+  delay(100);
+
+  // Fade in
+  for (int FadeValue = 0; FadeValue <= 255; FadeValue += 5) {
+    analogWrite(Led1, FadeValue);
+    analogWrite(Led2, FadeValue);
+    analogWrite(Led3, FadeValue);
+    analogWrite(Led4, FadeValue);
+    analogWrite(Led5, FadeValue);
+    analogWrite(Led6, FadeValue);
+
+    int Frequency = map(FadeValue, 0, 255, 200, 4000);
+    tone(Buzzer, Frequency);
+
+    delay(20);
+  }
+
+  delay(150);
+
+  // Fade out
+  for (int FadeValue = 255; FadeValue >= 0; FadeValue -= 5) {
+    analogWrite(Led1, FadeValue);
+    analogWrite(Led2, FadeValue);
+    analogWrite(Led3, FadeValue);
+    analogWrite(Led4, FadeValue);
+    analogWrite(Led5, FadeValue);
+    analogWrite(Led6, FadeValue);
+
+    int Frequency = map(FadeValue, 0, 255, 100, 4000);
+    tone(Buzzer, Frequency);
+
+    delay(20);
+  }
+
+  noTone(Buzzer);
+
+  // Ensure all LEDs turn off
+  analogWrite(Led1, 0);
+  analogWrite(Led2, 0);
+  analogWrite(Led3, 0);
+  analogWrite(Led4, 0);
+  analogWrite(Led5, 0);
+  analogWrite(Led6, 0);
+
+  delay(700);
+}
+
+void beepbeep() {
+
+  // FIRST BEEP + FADE
+  tone(Buzzer, 5000);
+
+  for (float FadeValue2 = 0; FadeValue2 <= 255; FadeValue2 += 55) {
+    analogWrite(Led1, FadeValue2);
+    analogWrite(Led2, FadeValue2);
+    analogWrite(Led3, FadeValue2);
+    analogWrite(Led4, FadeValue2);
+    analogWrite(Led5, FadeValue2);
+    analogWrite(Led6, FadeValue2);
+    delay(10);
+  }
+
+  noTone(Buzzer);
+
+  for (float FadeValue2 = 255; FadeValue2 >= 0; FadeValue2 -= 12.75) {
+    analogWrite(Led1, FadeValue2);
+    analogWrite(Led2, FadeValue2);
+    analogWrite(Led3, FadeValue2);
+    analogWrite(Led4, FadeValue2);
+    analogWrite(Led5, FadeValue2);
+    analogWrite(Led6, FadeValue2);
+    delay(10);
+  }
+
+  delay(100);
+
+  // SECOND BEEP + FADE
+   tone(Buzzer, 5000);
+
+  for (float FadeValue2 = 0; FadeValue2 <= 255; FadeValue2 += 55) {
+    analogWrite(Led1, FadeValue2);
+    analogWrite(Led2, FadeValue2);
+    analogWrite(Led3, FadeValue2);
+    analogWrite(Led4, FadeValue2);
+    analogWrite(Led5, FadeValue2);
+    analogWrite(Led6, FadeValue2);
+    delay(10);
+  }
+
+  noTone(Buzzer);
+
+  for (float FadeValue2 = 255; FadeValue2 >= 0; FadeValue2 -= 12.75) {
+    analogWrite(Led1, FadeValue2);
+    analogWrite(Led2, FadeValue2);
+    analogWrite(Led3, FadeValue2);
+    analogWrite(Led4, FadeValue2);
+    analogWrite(Led5, FadeValue2);
+    analogWrite(Led6, FadeValue2);
+    delay(10);
+  }
+
+  delay(700);
+}
+
+    
+
+void loop()
+{
+  beepbeep();
+  delay(100);
+    FadingPapart();
+    delay(100);
+  for (int i = 0; i < 3; i += 1){  
+  tone(Buzzer, 200);
+  digitalWrite(Led1, HIGH);
+  digitalWrite(Led2, LOW);
+  delay(200);
+  tone(Buzzer, 175);
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led1, LOW);
+  delay(100);
+  tone(Buzzer, 150);
+    digitalWrite(Led3, HIGH);
+  digitalWrite(Led2, LOW);
+  delay(100);
+  tone(Buzzer, 125);
+    digitalWrite(Led4, HIGH);
+  digitalWrite(Led3, LOW);
+  delay(100);
+  tone(Buzzer, 100);
+    digitalWrite(Led5, HIGH);
+  digitalWrite(Led4, LOW);
+  delay(100);
+  tone(Buzzer, 75);
+  digitalWrite(Led6, HIGH);
+  digitalWrite(Led5, LOW);
+  delay(200);
+  tone(Buzzer, 100);
+  digitalWrite(Led5, HIGH);
+  digitalWrite(Led6, LOW);
+  delay(100);
+  tone(Buzzer, 125);
+  digitalWrite(Led4, HIGH);
+  digitalWrite(Led5, LOW);
+  delay(100);
+  tone(Buzzer, 150);
+  digitalWrite(Led3, HIGH);
+  digitalWrite(Led4, LOW);
+  delay(100);
+  tone(Buzzer, 175);
+  digitalWrite(Led2, HIGH);
+  digitalWrite(Led3, LOW);
+  delay(100);
+  }
+  digitalWrite(Led2, LOW);
+   digitalWrite(Led1, HIGH);
+  delay(100);
+  digitalWrite(Led1, LOW);
+  FadingPapart();
+  delay(100);
+  beepbeep();
+  delay(100);
+}
